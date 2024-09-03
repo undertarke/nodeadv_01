@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../node_modules/@prisma/client-mysql"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL_MYSQL")
+}
+
+model customers {
+  customer_id BigInt  @id @unique(map: "customer_id") @default(autoincrement()) @db.UnsignedBigInt
+  name        String? @db.VarChar(100)
+  email       String? @db.VarChar(100)
+  phone       String? @db.VarChar(100)
+}
+
+model orders {
+  order_id    Int       @id @default(autoincrement())
+  customer_id Decimal?  @db.Decimal(10, 0)
+  product_id  Decimal?  @db.Decimal(10, 0)
+  order_date  DateTime? @db.Timestamp(0)
+  quantity    Decimal?  @db.Decimal(10, 0)
+}
+
+model products {
+  id           Int     @id @default(autoincrement())
+  name         String? @db.VarChar(100)
+  price        Int?
+  manufacturer String? @db.VarChar(100)
+  attributes   Json?
+}
+
+model productss {
+  id          Int       @id @default(autoincrement())
+  name        String?   @db.VarChar(255)
+  price       Decimal?  @db.Decimal(10, 2)
+  description String?   @db.Text
+  created_at  DateTime? @default(now()) @db.Timestamp(0)
+
+  @@index([price], map: "idx_created_at")
+}

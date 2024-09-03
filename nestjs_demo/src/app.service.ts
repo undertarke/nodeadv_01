@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient, products, orders } from '@prisma/client';
-import { PrismaService } from 'prisma/prisma.service';
+import { PrismaPostgreService } from 'prisma/prismaPostgre.service';
 
 @Injectable()
 export class AppService {
   // prisma = new PrismaClient()
   constructor(
 
-    private prismaService: PrismaService
+    private prismaService: PrismaPostgreService
   ) { }
 
 

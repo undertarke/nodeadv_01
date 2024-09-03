@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from '@ne
 import { AppService } from './app.service';
 import { ConfigService } from '@nestjs/config';
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from './decorators/user.decorator';
 
 class UserDto {
   @ApiProperty({ description: "asdas" })
@@ -53,7 +54,9 @@ export class AppController {
 
 
   @Get("/get-product")
-  getHello2() {
-    return this.appService.getHello()
+  getHello2(@User(2) user) {
+
+
+    return user
   }
 }
