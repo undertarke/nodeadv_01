@@ -27,5 +27,11 @@ export class ProductController {
     return this.productService.getSearch(name, page)
   }
 
+  @Get("/get-product-detail/:id")
+  getProductDetail(@Param("id") id) {
+
+    return this.productService.getProductDetail(id)
+  }
+
 
 }

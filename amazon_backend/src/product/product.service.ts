@@ -8,6 +8,17 @@ export class ProductService {
         private prismaService: PrismaService
     ) { }
 
+
+    async getProductDetail(id) {
+
+        let data = await this.prismaService.product.findFirst({
+            where: {
+                product_id: Number(id)
+            }
+        })
+        return data;
+    }
+
     async getProduct() {
 
         let data = await this.prismaService.product.findMany()
@@ -47,4 +58,6 @@ export class ProductService {
         })
         return data;
     }
+
+
 }

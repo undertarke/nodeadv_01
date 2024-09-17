@@ -23,9 +23,6 @@ export default function PaymentPages() {
           <Col span={20}>
           <Row gutter={[30,30]}>
             {handelProduct()}
-            {handelProduct()}
-            {handelProduct()}
-            {handelProduct()}
           </Row>
           
           </Col>

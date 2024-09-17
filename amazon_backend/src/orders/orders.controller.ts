@@ -1,24 +1,26 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Headers, Post } from '@nestjs/common';
 import { OrdersService } from './orders.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('orders')
 export class OrdersController {
-  constructor(private readonly ordersService: OrdersService) {}
+  constructor(
+    private readonly ordersService: OrdersService,
+
+    private jwtService: JwtService
+
+  ) { }
 
   @Post()
-  order(){
-
-
-    // order => lưu thông tin đơn hàng
+  order(@Headers("token") token, @Body() model) {
     
-    // notify => gửi mail thông báo cho user
+    let decode =this.jwtService.decode(token);
 
-    // ship => lưu thông tin shipping
-   
-    // payment => lưu thông tin thanh toán
-
-   
+    return this.ordersService.order(model, decode.userId)
 
   }
 
 }
+
+
+// nestjs
