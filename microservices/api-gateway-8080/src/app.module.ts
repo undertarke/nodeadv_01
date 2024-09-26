@@ -7,23 +7,23 @@ import { JwtModule } from '@nestjs/jwt'
   imports: [
 
 
-    ClientsModule.register([{
-      name: "PRODUCT_NAME",
-      transport: Transport.RMQ,
-      options: {
-        urls: ['amqp://admin:1234@localhost:5672'],
-        queue: 'product_queue',
-        queueOptions: {
-          durable: false
-        }
-      }
-    }]),
+    // ClientsModule.register([{
+    //   name: "PRODUCT_NAME",
+    //   transport: Transport.RMQ,
+    //   options: {
+    //     urls: ['amqp://admin:1234@localhost:5672'],
+    //     queue: 'product_queue',
+    //     queueOptions: {
+    //       durable: false
+    //     }
+    //   }
+    // }]),
 
     ClientsModule.register([{
       name: "ORDER_NAME",
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://admin:1234@localhost:5672'],
+        urls: ['amqp://admin:1234@some-rabbit:5672'],
         queue: 'order_queue',
         queueOptions: {
           durable: false
@@ -35,7 +35,7 @@ import { JwtModule } from '@nestjs/jwt'
       name: "NOTIFY_NAME",
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://admin:1234@localhost:5672'],
+        urls: ['amqp://admin:1234@some-rabbit:5672'],
         queue: 'notify_queue',
         queueOptions: {
           durable: false
@@ -47,7 +47,7 @@ import { JwtModule } from '@nestjs/jwt'
       name: "SHIPPING_NAME",
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://admin:1234@localhost:5672'],
+        urls: ['amqp://admin:1234@some-rabbit:5672'],
         queue: 'shipping_queue',
         queueOptions: {
           durable: false

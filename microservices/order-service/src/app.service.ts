@@ -1,9 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class AppService {
-  constructor(private prismaService: PrismaService) { }
+  constructor(
+    private prismaService: PrismaService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache
+  ) { }
 
   async order(data) {
     try {
@@ -20,5 +25,27 @@ export class AppService {
       return null
     }
 
+  }
+
+
+  async saveCache() {
+    let dataCache = await this.cacheManager.get("order");
+
+    if (dataCache) {
+      console.log("lấy từ cache")
+      return dataCache
+    }
+
+    let data = await this.prismaService.orders.findMany()
+
+    this.cacheManager.set("order", data)
+   
+    return data
+
+  }
+
+  deleteCache() {
+    this.cacheManager.reset()
+    return "Đã xóa cache"
   }
 }

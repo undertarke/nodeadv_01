@@ -9,43 +9,43 @@ export class ProductController {
     constructor(
         private jwtService: JwtService,
 
-        @Inject("PRODUCT_NAME") private productSerivce: ClientProxy,
+        // @Inject("PRODUCT_NAME") private productSerivce: ClientProxy,
         @Inject("ORDER_NAME") private orderSerivce: ClientProxy,
         @Inject("NOTIFY_NAME") private notifySerivce: ClientProxy,
         @Inject("SHIPPING_NAME") private shippingSerivce: ClientProxy,
 
     ) { }
 
-    @Get("/get-all")
-    async getProduct() {
+    // @Get("/get-all")
+    // async getProduct() {
 
-        let listProduct = await lastValueFrom(
-            this.productSerivce.send("get-all-product", { id: 69 })
-                .pipe(
-                    timeout(2000),
-                    retry(3),
-                    catchError(err => {
-                        //ghi log
-                        return of("Service Product request timeout, please try again !")
-                    })
-                )
+    //     let listProduct = await lastValueFrom(
+    //         this.productSerivce.send("get-all-product", { id: 69 })
+    //             .pipe(
+    //                 timeout(2000),
+    //                 retry(3),
+    //                 catchError(err => {
+    //                     //ghi log
+    //                     return of("Service Product request timeout, please try again !")
+    //                 })
+    //             )
 
-        ) // gửi message queue cho service
+    //     ) // gửi message queue cho service
 
-        // let listProductPro = lastValueFrom(this.productSerivce.send("get-all-product", { id: 69 })) // gửi message queue cho service
+    //     // let listProductPro = lastValueFrom(this.productSerivce.send("get-all-product", { id: 69 })) // gửi message queue cho service
 
-        // listProductPro.then().catch().finally()
+    //     // listProductPro.then().catch().finally()
 
-        // let listProduct = this.productSerivce.send("get-all-product", { id: 69 })
+    //     // let listProduct = this.productSerivce.send("get-all-product", { id: 69 })
 
-        // listProduct.subscribe({
-        //     next: (result) => { console.log(result) },
-        //     error: (error) => { console.log(error) },
-        //     complete: () => { }
-        // })
-        console.log(listProduct)
-        return listProduct
-    }
+    //     // listProduct.subscribe({
+    //     //     next: (result) => { console.log(result) },
+    //     //     error: (error) => { console.log(error) },
+    //     //     complete: () => { }
+    //     // })
+    //     console.log(listProduct)
+    //     return listProduct
+    // }
 
     @Post("/order")
     async order(@Headers("token") token, @Body() model) {
@@ -77,4 +77,17 @@ export class ProductController {
 
         return "Success"
     }
+
+    @Get("/save-cache")
+    async saveCache() {
+        return await this.orderSerivce.send("SAVE_CACHE", "")
+    }
+
+
+
+    @Get("/delete-cache")
+    async deleteCache() {
+        return await this.orderSerivce.send("DELETE_CACHE", "")
+    }
+
 }

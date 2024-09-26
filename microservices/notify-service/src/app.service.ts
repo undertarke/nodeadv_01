@@ -19,7 +19,7 @@ export class AppService {
       from: "sangrom2003@gmail.com",
       to: email, // "khaitruong2112@gmail.com"
       subject: `Đã đặt hàng qua Amazon - ${full_name} - ${email}`,
-      html: "<h1> Xác nhận đợn hàng thành công </h1>"
+      html: "<h1> Xác nhận đợn hàng thành công NEW </h1>"
     }
 
     configMail.sendMail(infoMail, error => error);
@@ -41,7 +41,7 @@ export class AppService {
       from: "sangrom2003@gmail.com",
       to: email, // "khaitruong2112@gmail.com"
       subject: `Đã đặt hàng qua Amazon - ${full_name} - ${email}`,
-      html: "<h1 style='color:red'> Đặt hàng thành công </h1>"
+      html: "<h1 style='color:red'> Đặt hàng thành công NEW </h1>"
     }
 
     configMail.sendMail(infoMail, error => error);
