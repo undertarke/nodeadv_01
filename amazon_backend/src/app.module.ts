@@ -5,11 +5,11 @@ import { ProductModule } from './product/product.module';
 import { AuthModule } from './auth/auth.module';
 import { OrdersModule } from './orders/orders.module';
 import { RedisModule } from './redis/redis.module';
+import { ElasticModule } from './elastic/elastic.module';
 
 @Module({
   imports: [
-    RedisModule
-    ,
+ 
     ConfigModule.forRoot({
       isGlobal: true
     }),
@@ -17,7 +17,8 @@ import { RedisModule } from './redis/redis.module';
     ProductModule,
     AuthModule,
     OrdersModule,
-    RedisModule
+    RedisModule,
+    ElasticModule
   ],
   controllers: [],
   providers: [],

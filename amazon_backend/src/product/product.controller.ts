@@ -1,9 +1,48 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
+import { ElasticsearchService } from '@nestjs/elasticsearch';
 
 @Controller('product')
 export class ProductController {
-  constructor(private readonly productService: ProductService) { }
+  constructor(
+    private readonly productService: ProductService,
+
+    private elasticService: ElasticsearchService
+
+  ) { }
+
+
+  @Get("/elastic")
+  async getElastic(@Query("name") nameProduct) {
+    this.elasticService.cat.indices()
+    // await this.elasticService.update({
+    //   index: "demo_index",
+    //   id: "ma_1",
+
+    //   doc: {
+    //     name: "demo 11"
+    //   },
+    //   refresh: true // làm mới lại index
+    // })
+
+    // await this.elasticService.delete({
+    //   index: "demo_index",
+    //   id: "atnXUZIBstd7JCmwpizo",
+    //   refresh: true
+    // })
+
+    let data = await this.elasticService.search({
+      index: "demo_index",
+      query: {
+        match: {
+          "name": nameProduct
+        }
+      }
+    })
+
+    return data
+  }
+
 
   @Get("/save")
   luuCache() {

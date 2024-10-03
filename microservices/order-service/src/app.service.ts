@@ -2,13 +2,29 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
+import { ElasticsearchService } from '@nestjs/elasticsearch';
 
 @Injectable()
 export class AppService {
   constructor(
     private prismaService: PrismaService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+
+    private elasticService: ElasticsearchService
   ) { }
+
+  async searchProduct(nameProduct) {
+    let data = await this.elasticService.search({
+      index: "demo_index",
+      query: {
+        match: {
+          "name": nameProduct
+        }
+      }
+    })
+
+    return data
+  }
 
   async order(data) {
     try {
@@ -39,7 +55,7 @@ export class AppService {
     let data = await this.prismaService.orders.findMany()
 
     this.cacheManager.set("order", data)
-   
+
     return data
 
   }

@@ -4,7 +4,7 @@ import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @MessagePattern("ORDER_PRODUCT_NAME")
   order(@Payload() data) {
@@ -12,13 +12,18 @@ export class AppController {
   }
 
   @MessagePattern("SAVE_CACHE")
-  saveCache(){
+  saveCache() {
     return this.appService.saveCache();
   }
 
   @MessagePattern("DELETE_CACHE")
-  deleteCache(){
+  deleteCache() {
     return this.appService.deleteCache();
 
+  }
+
+  @MessagePattern("FIND_PRODUCT")
+  searchProduct(@Payload() data) {
+    return this.appService.searchProduct(data)
   }
 }
