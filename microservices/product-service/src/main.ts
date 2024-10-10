@@ -10,7 +10,7 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       // url kết nối đến server RabbitMQ
-      urls: ['amqp://admin:1234@localhost:5672'],
+      urls: ['amqp://admin:1234@some-rabbit:5672'],
       // tên queue xử lý
       queue: 'product_queue',
       queueOptions: {

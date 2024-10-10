@@ -4,6 +4,9 @@ import * as nodemailer from 'nodemailer';
 @Injectable()
 export class AppService {
   sendMailInfoOrder(data) {
+
+    // throw new Error("Lỗi Notify service")
+
     let { email, full_name } = data
 
     let configMail = nodemailer.createTransport({

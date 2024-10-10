@@ -49,6 +49,9 @@ export class ProductController {
 
     @Post("/order")
     async order(@Headers("token") token, @Body() model) {
+       
+        throw new Error("Lỗi api gateway")
+       
         let decode = this.jwtService.decode(token);
 
 

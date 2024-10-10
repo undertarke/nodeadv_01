@@ -22,11 +22,18 @@ export class AppService {
         }
       }
     })
+    
+// this.prismaService.product.create()
+// this.elasticService.create({
+//   index:"product"
+// })
 
     return data
   }
 
   async order(data) {
+    // throw new Error("bugg order serivce")
+
     try {
       let { user_id, list_product } = data
       let newOrder = {
