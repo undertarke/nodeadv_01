@@ -11,6 +11,6 @@ export const login = async (model: any) => {
 
 export const searchProduct = async (name: any, page: any) => {
     // const { data } = await axios.get(`${DOMAIN_BE}/product/search-pagination?name=${name}&page=${page}`)
-    const { data } = await axios.get(`${DOMAIN_BE}/product/get-all`)
+    const { data } = await axios.get(`${DOMAIN_BE}/product`)
     return data
 }

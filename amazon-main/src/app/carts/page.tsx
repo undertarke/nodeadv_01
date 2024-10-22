@@ -1,5 +1,4 @@
 'use client'
-
 import { Button, Checkbox, Col, Empty, InputNumber, Rate, Row } from "antd";
 import React from "react";
 
